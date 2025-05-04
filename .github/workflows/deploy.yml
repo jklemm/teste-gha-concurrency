@@ -20,4 +20,4 @@ jobs:
 
     steps:
       - name: Deploy
-        run: sleep 2
+        run: sleep 60
