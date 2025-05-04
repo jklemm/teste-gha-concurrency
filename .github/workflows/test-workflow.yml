@@ -14,4 +14,4 @@ jobs:
 
     steps:
       - name: Run Tests
-        run: sleep 2
+        run: sleep 120
