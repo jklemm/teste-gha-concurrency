@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Run Tests
-        run: sleep 10
+        run: sleep 1
 
   deploy:
     name: Deploy to Production
@@ -36,4 +36,4 @@ jobs:
         run: |
           echo "github.event_name: ${{ github.event_name }}"
           echo "github.ref: ${{ github.ref }}"
-          sleep 10
+          sleep 1
