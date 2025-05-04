@@ -4,14 +4,105 @@ on:
   workflow_call:
 
 jobs:
-  tests:
-    name: Run Tests
+  lint-python:
+    name: Lint python code
     runs-on: ubuntu-latest
-
     concurrency:
       group: tests-${{ github.head_ref || github.ref }}
       cancel-in-progress: true
-
     steps:
-      - name: Run Tests
+      - name: Running
+        run: sleep 5
+
+  lint-js:
+    name: Lint javascript code
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Running
+        run: sleep 5
+
+  build-backend:
+    needs: lint-python
+    name: Build backend image
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Running
+        run: sleep 5
+
+  build-frontend:
+    needs: lint-js
+    name: Build frontend image
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Running
+        run: sleep 5
+
+  build-combined:
+    needs: [build-backend, build-frontend]
+    name: Build combined image
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Running
+        run: sleep 5
+
+  test-backend:
+    needs: build-backend
+    name: Run backend tests
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        index: [1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Running ${{ matrix.index }}
+        run: sleep 20
+
+  test-frontend:
+    needs: build-frontend
+    name: Run frontend tests
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    strategy:
+      matrix:
+        index: [1, 2, 3, 4, 5]
+    steps:
+      - name: Running ${{ matrix.index }}
+        run: sleep 20
+
+  test-e2e:
+    needs: build-combined
+    name: Run E2E tests
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Running
+        run: sleep 5
+
+  test-vrt:
+    needs: build-combined
+    name: Run VRT tests
+    runs-on: ubuntu-latest
+    concurrency:
+      group: tests-${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Running
         run: sleep 5
