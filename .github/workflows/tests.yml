@@ -1,0 +1,9 @@
+name: Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  tests:
+    uses: ./.github/workflows/test-workflow.yml

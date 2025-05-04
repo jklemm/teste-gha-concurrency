@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    uses: ./.github/workflows/test-workflow.yml
+
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: tests
+
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
+
+    steps:
+      - name: Deploy
+        run: sleep 2
