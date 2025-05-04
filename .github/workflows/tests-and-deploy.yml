@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Run Tests
-        run: sleep 300
+        run: sleep 10
 
   deploy:
     name: Deploy to Production
@@ -33,4 +33,4 @@ jobs:
 
     steps:
       - name: Deploying
-        run: sleep 300
+        run: sleep 10
