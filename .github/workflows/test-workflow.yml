@@ -12,7 +12,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
 
   lint-js:
     name: Lint javascript code
@@ -22,7 +22,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
 
   build-backend:
     needs: lint-python
@@ -33,7 +33,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
 
   build-frontend:
     needs: lint-js
@@ -44,7 +44,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
 
   build-combined:
     needs: [build-backend, build-frontend]
@@ -55,7 +55,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
 
   test-backend:
     needs: build-backend
@@ -69,7 +69,7 @@ jobs:
         index: [1, 2, 3, 4, 5, 6, 7]
     steps:
       - name: Running ${{ matrix.index }}
-        run: sleep 20
+        run: sleep 10
 
   test-frontend:
     needs: build-frontend
@@ -83,7 +83,7 @@ jobs:
         index: [1, 2, 3, 4, 5]
     steps:
       - name: Running ${{ matrix.index }}
-        run: sleep 20
+        run: sleep 7
 
   test-e2e:
     needs: build-combined
@@ -94,7 +94,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
 
   test-vrt:
     needs: build-combined
@@ -105,4 +105,4 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Running
-        run: sleep 5
+        run: sleep 3
