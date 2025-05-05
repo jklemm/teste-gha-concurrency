@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    uses: ./.github/workflows/test-workflow.yml
+    uses: ./.github/workflows/tests.yml
 
   deploy-sandbox:
     name: Deploy to Sandbox
