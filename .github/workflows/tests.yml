@@ -6,7 +6,7 @@ on:
   workflow_call:
 
 env:
-  CANCEL_IN_PROGRESS: ${{ env.CANCEL_IN_PROGRESS }}
+  CANCEL_IN_PROGRESS: ${{ !(github.ref_name == github.event.repository.default_branch && (contains(github.event.head_commit.message, 'hotfix') || contains(github.event.head_commit.message, 'bugfix') || contains(github.event.head_commit.message, 'revert'))) }}
 
 jobs:
   print-variables:
