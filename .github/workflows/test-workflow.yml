@@ -13,6 +13,10 @@ jobs:
     steps:
       - name: Running
         run: sleep 3
+      - name: Imprime variaveis
+        run: |
+          echo "github.head_ref: ${{ github.head_ref }}"
+          echo "github.ref: ${{ github.ref }}"
 
   lint-js:
     name: Lint javascript code
